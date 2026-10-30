@@ -1,10 +1,10 @@
 public class BubbleSort {
 
-    /** Versão do slide (índices ajustados para 0..n-1). */
+    // versão do slide: vai comparando de dois em dois e jogando o maior pro final
     public static void ordenar(int[] a) {
         int n = a.length;
         for (int i = 1; i <= n - 1; i++) {
-            for (int j = 0; j < n - i; j++) {
+            for (int j = 0; j < n - i; j++) { // o final já tá ordenado, então não precisa ir até lá
                 if (a[j] > a[j + 1]) {
                     trocar(a, j, j + 1);
                 }
@@ -12,7 +12,7 @@ public class BubbleSort {
         }
     }
 
-    /** Versão otimizada: para se uma passada completa não fez nenhuma troca. */
+    // igual a de cima, mas se uma passada inteira não trocou nada, já tá ordenado e para
     public static void ordenarOtimizado(int[] a) {
         int n = a.length;
         for (int i = 1; i <= n - 1; i++) {
