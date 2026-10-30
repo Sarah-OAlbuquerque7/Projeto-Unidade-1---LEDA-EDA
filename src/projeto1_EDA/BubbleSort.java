@@ -1,3 +1,5 @@
+package projeto1_EDA;
+
 public class BubbleSort {
 
     // versão do slide: vai comparando de dois em dois e jogando o maior pro final

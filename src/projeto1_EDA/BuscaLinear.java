@@ -1,3 +1,5 @@
+package projeto1_EDA;
+
 public class BuscaLinear {
 
     // vai de um em um até achar o x; se não achar devolve -1
@@ -23,5 +25,23 @@ public class BuscaLinear {
             return i;
         }
         return recursiva(a, x, i + 1);
+    }
+    
+    public static int iterativaDuasPontas(int[] a, int x) {
+    	int i = 0;
+    	int j = a.length - 1;
+    	
+    	while(i <= j) {
+    		if(a[i] == x) {
+    			return i;
+    		}
+    		if(a[j] == x) {
+    			return j;
+    		}
+    		i++;
+    		j--;
+    	}
+    	
+    	return -1;
     }
 }

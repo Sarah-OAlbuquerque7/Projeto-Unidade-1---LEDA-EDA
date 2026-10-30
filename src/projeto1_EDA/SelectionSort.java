@@ -1,3 +1,5 @@
+package projeto1_EDA;
+
 public class SelectionSort {
 
     // versão do slide: acha o menor do resto e troca com a posição i (não é estável)
