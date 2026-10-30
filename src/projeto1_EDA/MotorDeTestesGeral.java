@@ -85,9 +85,14 @@ public class MotorDeTestesGeral {
             // Garante que o algoritmo recebe uma cópia fresca e idêntica a cada rodada
             int[] vetorTeste = vetorBase.clone();
 
-            // ISOLAMENTO DO TEMPO
+         // ISOLAMENTO DO TEMPO
             long inicio = System.nanoTime();
-            algoritmo.accept(vetorTeste); // Executa o algoritmo injetado
+            try {
+                algoritmo.accept(vetorTeste); // Executa o algoritmo injetado
+            } catch (StackOverflowError e) {
+                System.out.printf("%-15s | Tamanho: %-7d | ERRO: StackOverflow (Pior Caso)%n", nomeAlgoritmo, vetorBase.length);
+                return; // Sai do método sem quebrar o resto do programa
+            }
             long fim = System.nanoTime();
             
             long duracaoNano = fim - inicio;
@@ -112,8 +117,7 @@ public class MotorDeTestesGeral {
     // 4. ÁREA DE TESTES (ONDE OS INTEGRANTES PLUGAM OS SEUS CÓDIGOS)
     // ========================================================================
     public static void main(String[] args) {
-        // Defina o trio de tamanhos desejado (ex: {10000, 30000, 60000} ou {50000, 150000, 500000})[cite: 129]
-        int[] tamanhos = {10000, 30000, 60000}; 
+        int[] tamanhos = {10000, 50000, 100000}; //tamanhos de análise
         
         System.out.println("=================================================");
         System.out.println("       INICIANDO BATERIA DE TESTES DE EDA        ");
@@ -125,11 +129,16 @@ public class MotorDeTestesGeral {
             int[] baseAleatoria = gerarAleatorio(tamanho);
             
             // Execuções do cenário aleatório:
-            rodarBenchmark("InsertionSort", vetor -> InsertionSort.insertionSort(vetor), baseAleatoria);
-            // rodarBenchmark("BubbleSort", vetor -> BubbleSort.ordenar(vetor), baseAleatoria);
-            // rodarBenchmark("QuickSort", vetor -> QuickSort.ordenar(vetor, 0, vetor.length - 1), baseAleatoria);
-            // rodarBenchmark("Arrays.sort", vetor -> Arrays.sort(vetor), baseAleatoria);
-            
+            rodarBenchmark("InsertionSort", vetor -> InsertionSort.ordenar(vetor), baseAleatoria);
+            rodarBenchmark("BubbleSort", vetor -> BubbleSort.ordenar(vetor), baseAleatoria);
+            rodarBenchmark("BubbleSort Otimizado", vetor -> BubbleSort.ordenarOtimizado(vetor), baseAleatoria);
+            rodarBenchmark("SelectionSort", vetor -> SelectionSort.ordenar(vetor), baseAleatoria);
+            rodarBenchmark("SelectionSort", vetor -> SelectionSort.ordenarEstavel(vetor), baseAleatoria);
+            rodarBenchmark("CountingSort", vetor -> CountingSort.ordenar(vetor), baseAleatoria);
+            rodarBenchmark("Merge Sort", vetor -> MergeSort.mergeSort(vetor, 0, vetor.length - 1), baseAleatoria);
+            rodarBenchmark("QuickSort", vetor -> QuickSort.quickSort(vetor, 0, vetor.length - 1), baseAleatoria);
+            rodarBenchmark("QuickSort (Shuffle)", vetor -> QuickSort.comShuffle(vetor), baseAleatoria);
+            rodarBenchmark("Arrays.sort (Nativo)", vetor -> java.util.Arrays.sort(vetor), baseAleatoria);            
             System.out.println("-------------------------------------------------");
         }
 
@@ -139,11 +148,16 @@ public class MotorDeTestesGeral {
             int[] baseOrdenada = gerarOrdenado(tamanho);
             
             // Execuções do cenário ordenado:
-            rodarBenchmark("InsertionSort", vetor -> InsertionSort.insertionSort(vetor), baseOrdenada);
-            // rodarBenchmark("BubbleSort", vetor -> BubbleSort.ordenar(vetor), baseOrdenada);
-            // rodarBenchmark("QuickSort", vetor -> QuickSort.ordenar(vetor, 0, vetor.length - 1), baseOrdenada);
-            // rodarBenchmark("Arrays.sort", vetor -> Arrays.sort(vetor), baseOrdenada);
-            
+            rodarBenchmark("InsertionSort", vetor -> InsertionSort.ordenar(vetor), baseOrdenada);
+            rodarBenchmark("BubbleSort", vetor -> BubbleSort.ordenar(vetor), baseOrdenada);
+            rodarBenchmark("BubbleSort Otimizado", vetor -> BubbleSort.ordenarOtimizado(vetor), baseOrdenada);
+            rodarBenchmark("SelectionSort", vetor -> SelectionSort.ordenar(vetor), baseOrdenada);
+            rodarBenchmark("SelectionSort", vetor -> SelectionSort.ordenarEstavel(vetor), baseOrdenada);
+            rodarBenchmark("CountingSort", vetor -> CountingSort.ordenar(vetor), baseOrdenada);
+            rodarBenchmark("Merge Sort", vetor -> MergeSort.mergeSort(vetor, 0, vetor.length - 1), baseOrdenada);
+            rodarBenchmark("QuickSort", vetor -> QuickSort.quickSort(vetor, 0, vetor.length - 1), baseOrdenada);
+            rodarBenchmark("QuickSort (Shuffle)", vetor -> QuickSort.comShuffle(vetor), baseOrdenada);
+            rodarBenchmark("Arrays.sort (Nativo)", vetor -> java.util.Arrays.sort(vetor), baseOrdenada);
             System.out.println("-------------------------------------------------");
         }
 
@@ -155,11 +169,16 @@ public class MotorDeTestesGeral {
             int[] baseInversa = gerarInverso(tamanho);
             
             // Execuções do cenário inverso:
-            rodarBenchmark("InsertionSort", vetor -> InsertionSort.insertionSort(vetor), baseInversa);
-            // rodarBenchmark("BubbleSort", vetor -> BubbleSort.ordenar(vetor), baseInversa);
-            // rodarBenchmark("QuickSort", vetor -> QuickSort.ordenar(vetor, 0, vetor.length - 1), baseInversa);
-            // rodarBenchmark("Arrays.sort", vetor -> Arrays.sort(vetor), baseInversa);
-            
+            rodarBenchmark("InsertionSort", vetor -> InsertionSort.ordenar(vetor), baseInversa);
+            rodarBenchmark("BubbleSort", vetor -> BubbleSort.ordenar(vetor), baseInversa);
+            rodarBenchmark("BubbleSort Otimizado", vetor -> BubbleSort.ordenarOtimizado(vetor), baseInversa);
+            rodarBenchmark("SelectionSort", vetor -> SelectionSort.ordenar(vetor), baseInversa);
+            rodarBenchmark("SelectionSort", vetor -> SelectionSort.ordenarEstavel(vetor), baseInversa);
+            rodarBenchmark("CountingSort", vetor -> CountingSort.ordenar(vetor), baseInversa);
+            rodarBenchmark("Merge Sort", vetor -> MergeSort.mergeSort(vetor, 0, vetor.length - 1), baseInversa);
+            rodarBenchmark("QuickSort", vetor -> QuickSort.quickSort(vetor, 0, vetor.length - 1), baseInversa);
+            rodarBenchmark("QuickSort (Shuffle)", vetor -> QuickSort.comShuffle(vetor), baseInversa);
+            rodarBenchmark("Arrays.sort (Nativo)", vetor -> java.util.Arrays.sort(vetor), baseInversa);
             System.out.println("-------------------------------------------------");
         }
 
@@ -169,11 +188,44 @@ public class MotorDeTestesGeral {
             int[] baseParcial = gerarParcialmenteOrdenado(tamanho);
             
             // Execuções do cenário parcialmente ordenado:
-            rodarBenchmark("InsertionSort", vetor -> InsertionSort.insertionSort(vetor), baseParcial);
-            // rodarBenchmark("BubbleSort", vetor -> BubbleSort.ordenar(vetor), baseParcial);
-            // rodarBenchmark("QuickSort", vetor -> QuickSort.ordenar(vetor, 0, vetor.length - 1), baseParcial);
-            // rodarBenchmark("Arrays.sort", vetor -> Arrays.sort(vetor), baseParcial);
+            rodarBenchmark("InsertionSort", vetor -> InsertionSort.ordenar(vetor), baseParcial);
+            rodarBenchmark("BubbleSort", vetor -> BubbleSort.ordenar(vetor), baseParcial);
+            rodarBenchmark("BubbleSort Otimizado", vetor -> BubbleSort.ordenarOtimizado(vetor), baseParcial);
+            rodarBenchmark("SelectionSort", vetor -> SelectionSort.ordenar(vetor), baseParcial);
+            rodarBenchmark("SelectionSort", vetor -> SelectionSort.ordenarEstavel(vetor), baseParcial);
+            rodarBenchmark("CountingSort", vetor -> CountingSort.ordenar(vetor), baseParcial);
+            rodarBenchmark("Merge Sort", vetor -> MergeSort.mergeSort(vetor, 0, vetor.length - 1), baseParcial);
+            rodarBenchmark("QuickSort", vetor -> QuickSort.quickSort(vetor, 0, vetor.length - 1), baseParcial);
+            rodarBenchmark("QuickSort (Shuffle)", vetor -> QuickSort.comShuffle(vetor), baseParcial);
+            rodarBenchmark("Arrays.sort (Nativo)", vetor -> java.util.Arrays.sort(vetor), baseParcial);
+            System.out.println("-------------------------------------------------");
+        }
+        
+        
+        System.out.println("\n[CENÁRIO: TESTES DE BUSCA]");
+
+        for (int tamanho : tamanhos) {
+            // Para Busca Binária funcionar, o vetor TEM que estar ordenado!
+            int[] baseOrdenada = gerarOrdenado(tamanho);
             
+            int alvoPiorCaso = -1; // Um número que não existe no vetor
+            
+            
+            rodarBenchmark("Busca Linear Iterativa", 
+                vetor -> BuscaLinear.iterativa(vetor, alvoPiorCaso), baseOrdenada);
+                
+            rodarBenchmark("Busca Linear Recursiva", 
+                    vetor -> BuscaLinear.recursiva(vetor, alvoPiorCaso), baseOrdenada);
+            
+            rodarBenchmark("Busca Linear Duas Pontas", 
+                    vetor -> BuscaLinear.iterativaDuasPontas(vetor, alvoPiorCaso), baseOrdenada); 
+            
+            rodarBenchmark("Busca Binária Iterativa", 
+                vetor -> BuscaBinaria.iterativa(vetor, alvoPiorCaso), baseOrdenada);
+
+            rodarBenchmark("Busca Binária Recursiva", 
+                vetor -> BuscaBinaria.recursiva(vetor, alvoPiorCaso, 0, vetor.length - 1), baseOrdenada);
+                
             System.out.println("-------------------------------------------------");
         }
     }

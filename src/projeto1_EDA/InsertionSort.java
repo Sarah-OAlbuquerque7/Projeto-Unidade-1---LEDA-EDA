@@ -2,7 +2,7 @@ package projeto1_EDA;
 
 public class InsertionSort {
 	
-	public static void insertionSort(int[] v) {
+	public static void ordenar(int[] v) {
 		int n = v.length;
 		
 		for(int j = 1; j < n; j++) {
