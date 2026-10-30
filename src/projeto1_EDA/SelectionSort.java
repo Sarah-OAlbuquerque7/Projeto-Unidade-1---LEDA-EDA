@@ -1,6 +1,6 @@
 public class SelectionSort {
 
-    /** Versão do slide (tradicional, NÃO estável). */
+    // versão do slide: acha o menor do resto e troca com a posição i (não é estável)
     public static void ordenar(int[] a) {
         int n = a.length;
         for (int i = 0; i < n - 1; i++) {
@@ -14,18 +14,14 @@ public class SelectionSort {
         }
     }
 
-    /**
-     * Versão estável: em vez de trocar, guarda o menor, desloca os
-     * elementos anteriores uma posição para a direita e insere o menor em i.
-     * Como o menor escolhido é sempre o primeiro (mais à esquerda) entre os iguais
-     * (comparação estrita <), a ordem relativa dos iguais é preservada.
-     */
+    // versão estável: em vez de trocar, empurra todo mundo uma casa pra frente
+    // e coloca o menor em i (assim os iguais não invertem de ordem)
     public static void ordenarEstavel(int[] a) {
         int n = a.length;
         for (int i = 0; i < n - 1; i++) {
             int min = i;
             for (int j = i + 1; j < n; j++) {
-                if (a[j] < a[min]) {
+                if (a[j] < a[min]) { // só < (não <=) pra pegar o primeiro dos iguais
                     min = j;
                 }
             }
