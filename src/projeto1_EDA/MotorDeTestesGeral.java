@@ -108,34 +108,74 @@ public class MotorDeTestesGeral {
         System.out.printf("%-15s | Tamanho: %-7d | Tempo Médio: %10.3f ms%n", 
                           nomeAlgoritmo, vetorBase.length, mediaMili);
     }
-
-    // ========================================================================
+ // ========================================================================
     // 4. ÁREA DE TESTES (ONDE OS INTEGRANTES PLUGAM OS SEUS CÓDIGOS)
     // ========================================================================
     public static void main(String[] args) {
-        int[] tamanhos = {50000, 150000, 500000};
+        // Defina o trio de tamanhos desejado (ex: {10000, 30000, 60000} ou {50000, 150000, 500000})[cite: 129]
+        int[] tamanhos = {10000, 30000, 60000}; 
         
         System.out.println("=================================================");
-        System.out.println(" INICIANDO BATERIA DE TESTES - CENÁRIO ALEATÓRIO ");
+        System.out.println("       INICIANDO BATERIA DE TESTES DE EDA        ");
         System.out.println("=================================================");
 
+        
+        System.out.println("\n[Cenário 1: Aleatório]");
         for (int tamanho : tamanhos) {
             int[] baseAleatoria = gerarAleatorio(tamanho);
-
-            // Exemplo de como o Integrante 3 testa o Insertion Sort:
-            // rodarBenchmark("InsertionSort", vetor -> insertionSort(vetor), baseAleatoria);
             
-            // Exemplo de como o Integrante 2 testa o nativo do Java:
-            rodarBenchmark("Arrays.sort", vetor -> Arrays.sort(vetor), baseAleatoria);
-
-            // Exemplo de como o Integrante 2 testa o QuickSort (que exige parâmetros de índice):
-            // rodarBenchmark("QuickSort", vetor -> quickSort(vetor, 0, vetor.length - 1), baseAleatoria);
+            // Execuções do cenário aleatório:
+            rodarBenchmark("InsertionSort", vetor -> InsertionSort.insertionSort(vetor), baseAleatoria);
+            // rodarBenchmark("BubbleSort", vetor -> BubbleSort.ordenar(vetor), baseAleatoria);
+            // rodarBenchmark("QuickSort", vetor -> QuickSort.ordenar(vetor, 0, vetor.length - 1), baseAleatoria);
+            // rodarBenchmark("Arrays.sort", vetor -> Arrays.sort(vetor), baseAleatoria);
             
             System.out.println("-------------------------------------------------");
         }
+
+       
+        System.out.println("\n[Cenário 2: Já Ordenado]");
+        for (int tamanho : tamanhos) {
+            int[] baseOrdenada = gerarOrdenado(tamanho);
+            
+            // Execuções do cenário ordenado:
+            rodarBenchmark("InsertionSort", vetor -> InsertionSort.insertionSort(vetor), baseOrdenada);
+            // rodarBenchmark("BubbleSort", vetor -> BubbleSort.ordenar(vetor), baseOrdenada);
+            // rodarBenchmark("QuickSort", vetor -> QuickSort.ordenar(vetor, 0, vetor.length - 1), baseOrdenada);
+            // rodarBenchmark("Arrays.sort", vetor -> Arrays.sort(vetor), baseOrdenada);
+            
+            System.out.println("-------------------------------------------------");
+        }
+
+        // ====================================================================
+        // 3. CENÁRIO: ORDEM INVERSA[cite: 130]
+        // ====================================================================
+        System.out.println("\n[Cenário 3: Ordem Inversa]");
+        for (int tamanho : tamanhos) {
+            int[] baseInversa = gerarInverso(tamanho);
+            
+            // Execuções do cenário inverso:
+            rodarBenchmark("InsertionSort", vetor -> InsertionSort.insertionSort(vetor), baseInversa);
+            // rodarBenchmark("BubbleSort", vetor -> BubbleSort.ordenar(vetor), baseInversa);
+            // rodarBenchmark("QuickSort", vetor -> QuickSort.ordenar(vetor, 0, vetor.length - 1), baseInversa);
+            // rodarBenchmark("Arrays.sort", vetor -> Arrays.sort(vetor), baseInversa);
+            
+            System.out.println("-------------------------------------------------");
+        }
+
         
-        // O grupo deve repetir os blocos acima para os cenários: 
-        // gerarOrdenado(), gerarInverso() e gerarParcialmenteOrdenado().
+        System.out.println("\n[Cenário 4: Parcialmente Ordenado]");
+        for (int tamanho : tamanhos) {
+            int[] baseParcial = gerarParcialmenteOrdenado(tamanho);
+            
+            // Execuções do cenário parcialmente ordenado:
+            rodarBenchmark("InsertionSort", vetor -> InsertionSort.insertionSort(vetor), baseParcial);
+            // rodarBenchmark("BubbleSort", vetor -> BubbleSort.ordenar(vetor), baseParcial);
+            // rodarBenchmark("QuickSort", vetor -> QuickSort.ordenar(vetor, 0, vetor.length - 1), baseParcial);
+            // rodarBenchmark("Arrays.sort", vetor -> Arrays.sort(vetor), baseParcial);
+            
+            System.out.println("-------------------------------------------------");
+        }
     }
 }
 
