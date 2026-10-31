@@ -9,9 +9,7 @@ public class MotorDeTestesGeral {
     private static final Random rand = new Random();
     private static final int MAX_VALOR = 100000;
 
-    // ========================================================================
-    // 1. GERADORES DE CENÁRIOS (RESPONSABILIDADE DO INTEGRANTE 3)
-    // ========================================================================
+    
 
     // Cenário 1: Vetor Aleatório
     public static int[] gerarAleatorio(int tamanho) {
@@ -57,9 +55,7 @@ public class MotorDeTestesGeral {
         return vetor;
     }
 
-    // ========================================================================
-    // 2. VERIFICADOR DE SANIDADE
-    // ========================================================================
+    
     public static boolean isOrdenado(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             if (arr[i] > arr[i + 1]) return false;
@@ -67,15 +63,9 @@ public class MotorDeTestesGeral {
         return true;
     }
 
-    // ========================================================================
-    // 3. O MOTOR UNIVERSAL DE MEDIÇÃO DE DESEMPENHO
-    // ========================================================================
-    
-    /**
-     * @param nomeAlgoritmo Nome para imprimir no terminal
-     * @param algoritmo A função do algoritmo (passada via Lambda)
-     * @param vetorBase O vetor original do cenário que será clonado
-     */
+   
+    // algoritmo A função do algoritmo (passada via Lambda)
+     
     public static void rodarBenchmark(String nomeAlgoritmo, Consumer<int[]> algoritmo, int[] vetorBase) {
         int totalExecucoes = 25;
         int warmUp = 5;
@@ -113,9 +103,8 @@ public class MotorDeTestesGeral {
         System.out.printf("%-15s | Tamanho: %-7d | Tempo Médio: %10.3f ms%n", 
                           nomeAlgoritmo, vetorBase.length, mediaMili);
     }
- // ========================================================================
-    // 4. ÁREA DE TESTES (ONDE OS INTEGRANTES PLUGAM OS SEUS CÓDIGOS)
-    // ========================================================================
+    
+    //Área de testes
     public static void main(String[] args) {
         int[] tamanhos = {10000, 50000, 100000}; //tamanhos de análise
         
@@ -161,9 +150,7 @@ public class MotorDeTestesGeral {
             System.out.println("-------------------------------------------------");
         }
 
-        // ====================================================================
-        // 3. CENÁRIO: ORDEM INVERSA[cite: 130]
-        // ====================================================================
+       
         System.out.println("\n[Cenário 3: Ordem Inversa]");
         for (int tamanho : tamanhos) {
             int[] baseInversa = gerarInverso(tamanho);

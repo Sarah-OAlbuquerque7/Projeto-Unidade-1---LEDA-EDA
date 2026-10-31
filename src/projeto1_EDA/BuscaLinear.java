@@ -12,7 +12,7 @@ public class BuscaLinear {
         return -1;
     }
 
-    // mesma ideia, mas com recursão (cuidado: com vetor grande estoura a pilha)
+    // mesma ideia, mas com recursão 
     public static int recursiva(int[] a, int x) {
         return recursiva(a, x, 0);
     }
@@ -31,7 +31,7 @@ public class BuscaLinear {
     	int i = 0;
     	int j = a.length - 1;
     	
-    	while(i <= j) {
+    	while(i <= j) { //até se cruzarem
     		if(a[i] == x) {
     			return i;
     		}
@@ -42,6 +42,6 @@ public class BuscaLinear {
     		j--;
     	}
     	
-    	return -1;
+    	return -1; //caso base
     }
 }

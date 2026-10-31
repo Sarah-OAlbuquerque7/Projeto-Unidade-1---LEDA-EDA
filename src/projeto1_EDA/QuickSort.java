@@ -33,7 +33,7 @@ public class QuickSort {
         quickSort(v, 0, v.length - 1); // Chama a versão do slide de forma segura
     }
 
-    // Algoritmo de Fisher-Yates para embaralhamento linear O(n)
+    // Algoritmo para embaralhamento linear O(n)
     private static void embaralhar(int[] v) {
         Random rand = new Random();
         for (int i = v.length - 1; i > 0; i--) {
