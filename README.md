@@ -53,7 +53,7 @@ Medir o desempenho de algoritmos de busca e ordenação em diferentes cenários 
 
 ## 📦 Entregas do projeto
 
-- 📄 [Relatório em PDF]()
+- 📄 [Relatório em PDF](Relatorio_Unidade1_EDA.pdf)
 
 ## 👥 Autores
 
